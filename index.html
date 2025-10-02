@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartStock - Login & Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Login -->
+    <div id="login-box" class="box">
+      <h2>📦  Login</h2>
+      <form id="login-form">
+        <input type="text" id="login-usuario" placeholder="Usuário" required>
+        <input type="password" id="login-senha" placeholder="Senha" required>
+        <button type="submit"><a href="cadastro.html" ></a>Entrar</button>
+      </form>
+      <p>Ainda não tem conta? 
+        <a href="#" onclick="mostrarCadastro()">Cadastre-se</a>
+      </p>
+      <p id="login-msg" class="msg"></p>
+    </div>
+
+    <!-- Cadastro -->
+    <div id="cadastro-box" class="box hidden">
+      <h2>📝 Cadastro</h2>
+      <form id="cadastro-form">
+        <input type="text" id="cadastro-usuario" placeholder="Usuário" required>
+        <input type="password" id="cadastro-senha" placeholder="Senha" required>
+        <input type="text" id="cadastro-email" placeholder="E-mail" required>
+        <input type="text" id="cadastro-email" placeholder="Telefone/Celular" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p>Já tem conta? 
+        <a href="#" onclick="mostrarLogin()">Fazer login</a>
+      </p>
+      <p id="cadastro-msg" class="msg"></p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
