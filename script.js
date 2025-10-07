@@ -1,3 +1,4 @@
+// Seletores principais
 const loginBox = document.getElementById("login-box");
 const cadastroBox = document.getElementById("cadastro-box");
 
@@ -7,12 +8,13 @@ const cadastroForm = document.getElementById("cadastro-form");
 const loginMsg = document.getElementById("login-msg");
 const cadastroMsg = document.getElementById("cadastro-msg");
 
-// Mostrar/ocultar telas
+// Alterna para tela de cadastro
 function mostrarCadastro() {
   loginBox.classList.add("hidden");
   cadastroBox.classList.remove("hidden");
 }
 
+// Alterna para tela de login
 function mostrarLogin() {
   cadastroBox.classList.add("hidden");
   loginBox.classList.remove("hidden");
@@ -25,16 +27,31 @@ cadastroForm.addEventListener("submit", (e) => {
   const usuario = document.getElementById("cadastro-usuario").value;
   const senha = document.getElementById("cadastro-senha").value;
   const email = document.getElementById("cadastro-email").value;
-  const contato = document.getElementById("cadastro-contato").value;
+  const telefone = document.getElementById("cadastro-contato").value;
 
-  if (localStorage.getItem(usuario, senha, email)) {
+  // Verifica se já existe
+  if (localStorage.getItem(usuario)) {
     cadastroMsg.textContent = "⚠️ Usuário já existe!";
     cadastroMsg.style.color = "red";
   } else {
-    localStorage.setItem(usuario, senha, email, contato);
+    // Salva como objeto (JSON)
+    const novoUsuario = {
+      senha,
+      email,
+      telefone
+    };
+    localStorage.setItem(usuario, JSON.stringify(novoUsuario));
+
     cadastroMsg.textContent = "✅ Cadastro realizado com sucesso!";
     cadastroMsg.style.color = "green";
+
+    // Limpa formulário
     cadastroForm.reset();
+
+    // Volta para login depois de 1,5s
+    setTimeout(() => {
+      mostrarLogin();
+    }, 1500);
   }
 });
 
@@ -44,18 +61,30 @@ loginForm.addEventListener("submit", (e) => {
 
   const usuario = document.getElementById("login-usuario").value;
   const senha = document.getElementById("login-senha").value;
-  const senhaSalva = localStorage.getItem(usuario);
 
-  if (senhaSalva && senhaSalva === senha) {
-    loginMsg.textContent = "✅ Login realizado!";
-    loginMsg.style.color = "green";
-    // Redirecionar (exemplo)
-    setTimeout(() => {
-      alert("Bem-vindo ao SmartStock!");
-      window.location.href = "home.html"; // página principal do app
-    }, 1000);
+  const dados = localStorage.getItem(usuario);
+
+  if (dados) {
+    const usuarioSalvo = JSON.parse(dados);
+
+    if (usuarioSalvo.senha === senha) {
+      loginMsg.textContent = "✅ Login realizado!";
+      loginMsg.style.color = "green";
+
+      // Salva usuário logado
+      localStorage.setItem("usuarioLogado", usuario);
+
+      // Redireciona para home
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1000);
+    } else {
+      loginMsg.textContent = "❌ Senha incorreta!";
+      loginMsg.style.color = "red";
+    }
   } else {
-    loginMsg.textContent = "❌ Usuário ou senha inválidos!";
+    loginMsg.textContent = "❌ Usuário não encontrado!";
     loginMsg.style.color = "red";
   }
 });
+

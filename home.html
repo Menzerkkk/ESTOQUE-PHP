@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartStock - Home</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <header>
+    <h1>📦 SmartStock</h1>
+    <p id="boas-vindas"></p>
+    <button id="logout">Sair</button>
+  </header>
+
+  <main>
+    <section class="atalhos">
+      <div class="card" onclick="abrirPagina('dashboard.html')">
+        <h2>📊 Dashboard</h2>
+        <p>Visualize o resumo do estoque em tempo real.</p>
+      </div>
+
+      <div class="card" onclick="abrirPagina('relatorios.html')">
+        <h2>📋 Relatórios</h2>
+        <p>Gere relatórios de movimentação e desempenho.</p>
+      </div>
+
+      <div class="card" onclick="abrirPagina('configuracoes.html')">
+        <h2>⚙️ Configurações</h2>
+        <p>Gerencie preferências e dados da conta.</p>
+        </div>
+
+      <div class="card" onclick="abrirPagina('cadastro.html')">
+        <h2> Cadastros</h2>
+        <p>Gerencie preferências e dados da conta.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>SmartStock © 2025 - Sistema de Estoque Inteligente</p>
+  </footer>
+
+  <script src="home.js"></script>
+</body>
+</html>
